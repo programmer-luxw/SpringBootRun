@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active:
+    - dev
+
+
+debug: false
+
+#Acutator
+#management.server.port=8081
+#management.endpoints.web.expose=*
+#management.endpoints.web.base-path=/manage

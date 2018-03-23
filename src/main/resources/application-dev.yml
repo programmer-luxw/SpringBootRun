@@ -1,0 +1,15 @@
+server:
+  port: 80
+  servlet:
+    context-path: /app
+
+logging:
+  file: app/app-dev.log
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+    file: "%d %-5level [%thread] %logger : %msg%n"
+  level: 
+    root: INFO
+    org.springframework.web: ERROR
+    cn.luxw.app: DEBUG
+    org.hibernate: ERROR
