@@ -1,4 +1,7 @@
 package cn.luxw.app.jdk8;
+
+import java.util.Arrays;
+
 /**
  * Created by wangwenjun on 2016/10/18.
  */
@@ -45,4 +48,9 @@ public class Dish {
                 ", type=" + type +
                 '}';
     }
+    public static void main(String[] args) {
+    	  String c ="bacd";
+    	  
+          System.out.println(Arrays.toString(c.split("")));
+	}
 }

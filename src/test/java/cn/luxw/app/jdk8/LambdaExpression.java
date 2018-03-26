@@ -11,6 +11,8 @@ import java.util.function.Supplier;
 
 /**
  * Created by wangwenjun on 2016/10/12.
+ * 
+ * lambda有两种写法,可以用来构造匿名内部类对象(只有一个方法的接口)
  */
 public class LambdaExpression {
 
@@ -27,6 +29,7 @@ public class LambdaExpression {
 
         list.sort(byColor);
 
+        //1.匿名内部类只有一个方法的可以推导出来这个类.
         //箭头后面没有大括号的时候,返回值可以推导出来
         Comparator<Apple> byColor2 = (o1, o2) -> o1.getColor().compareTo(o2.getColor());
         

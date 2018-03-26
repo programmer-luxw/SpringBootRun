@@ -5,16 +5,58 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-/**
- * Created by wangwenjun on 2016/10/16.
+import cn.luxw.app.jdk8.domain.Test;
+
+/*
+ * 一、方法引用：若 Lambda 体中的功能，已经有方法提供了实现，可以使用方法引用
+ * 			  （可以将方法引用理解为 Lambda 表达式的另外一种表现形式）
+ * 
+ * 1. 对象的引用 :: 实例方法名
+ * 
+ * 2. 类名 :: 静态方法名
+ * 
+ * 3. 类名 :: 实例方法名
+ * 
+ * 注意：
+ * 	 ①方法引用所引用的方法的参数列表与返回值类型，需要与函数式接口中抽象方法的参数列表和返回值类型保持一致！
+ * 	 ②若Lambda 的参数列表的第一个参数，是实例方法的调用者，第二个参数(或无参)是实例方法的参数时，格式： ClassName::MethodName
+ * 	如:非静态方法
+ *      BiFunction<String, Integer, Character> ff= (x,y)->x.charAt(y);
+        BiFunction<String, Integer, Character> f2 = String::charAt;
+        
+        Function<String, Integer> ffff = (x)->x.length();
+    	Function<String, Integer> fff = String::length;
+ * 二、构造器引用 :构造器的参数列表，需要与函数式接口中参数列表保持一致！
+ * 
+ * 1. 类名 :: new
+ * 
+ * 三、数组引用
+ * 
+ * 	类型[] :: new;
+ * 
+ * 
  */
 public class MethodReference {
 
     public static void main(String[] args) {
+    	  
+    	
+    	BiPredicate<String, String> bp = (x, y) -> x.equals(y);
+		System.out.println(bp.test("abcde", "abcde"));
+		
+		System.out.println("-----------------------------------------");
+		
+		//两个x,y参数,调用顺序也是x调用y,
+		BiPredicate<String, String> bp2 = String::equals;
+		System.out.println(bp2.test("abc", "abc"));
+		
+		System.out.println("-----------------------------------------");
+    	
 
         /*Consumer<String> consumer = (s) -> System.out.println(s);
         useConsumer(consumer, "Hello Alex");*/
@@ -29,7 +71,7 @@ public class MethodReference {
 
         list.sort((a1, a2) -> a1.getColor().compareTo(a2.getColor()));
 
-        System.out.println(list);
+        System.out.println(list); 
 
         list.stream().forEach(a -> System.out.println(a));
 
@@ -44,10 +86,12 @@ public class MethodReference {
         Integer result = f.apply("123");
         System.out.println(result);
 
-        //方法推导2
+        // BiFunction<String, Integer, Character> ff= (x,y)->x.charAt(y);
         BiFunction<String, Integer, Character> f2 = String::charAt;
         Character c = f2.apply("hello", 2);
         System.out.println(c);
+        
+        BiFunction<String, Integer, Character> ff= (x,y)->x.charAt(y);
 
         
         //方法推导3,具体类的实例推导
@@ -59,6 +103,7 @@ public class MethodReference {
 
         //构造函数推导
         Supplier<String> supplier = String::new;
+        Supplier<String> ss = ()-> new String();
 
         String s = supplier.get();
         System.out.println(s);
