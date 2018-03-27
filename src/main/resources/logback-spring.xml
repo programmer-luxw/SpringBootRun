@@ -1,0 +1,149 @@
+<configuration scan="false" scanPeriod="60 seconds" debug="false">  
+<!-- Logback configuration. See http://logback.qos.ch/manual/index.html -->  
+
+ <contextName>SpringBootRun</contextName>
+
+  <springProfile name="test,dev,beta">  
+    <property name="LOG_HOME" value="/data/logs/SpringBootRun/beta" />  
+ </springProfile> 
+ 
+ <springProfile name="prod">  
+    <property name="LOG_HOME" value="/data/logs/SpringBootRun/release" />  
+ </springProfile> 
+    
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">  
+		  <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">  
+		        <pattern>  
+              <!--https://blog.csdn.net/u010311267/article/details/40213069 %date{yyyy-MM-dd HH:mm:ss.SSS} %level ${API_TYPE} %msg%n-->
+		          %d %cn [%t] %-5p %c{36}.%M:%L - %m%n
+		        </pattern>  
+		        <charset>UTF-8</charset> 
+		    </encoder>  
+		    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">  
+		      <level>DEBUG</level>  
+		    </filter>  
+  	</appender> 
+  
+   
+   <!-- error log -->  
+   <appender name="FILEERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    	<!-- 正在记录的日志文件的路径及文件名 -->
+        <file>${LOG_HOME}/error.log</file>
+         <!-- 归档的日志文件的路径  除按日志记录之外，还配置了日志文件不能超过2M，若超过2M，日志文件会以索引0开始-->
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/%d{yyyy-MM-dd}/error-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+          	<MaxHistory>30</MaxHistory>
+    	</rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+               %d %cn [%t] %-5p %c{36}.%M:%L - %m%n
+            </pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>error</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+    
+     <!-- warn log -->  
+   <appender name="FILEWARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/warn.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/%d{yyyy-MM-dd}/warn-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+          	<MaxHistory>30</MaxHistory>
+    	</rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+                %d %cn [%t] %-5p %c{36}.%M:%L - %m%n
+            </pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+    
+    <!-- info log -->  
+   <appender name="FILEINFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/info.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/%d{yyyy-MM-dd}/info-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+          	<MaxHistory>30</MaxHistory>
+    	</rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+              %d %cn [%t] %-5p %c{36}.%M:%L - %m%n
+            </pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+    
+    <!-- debug log -->  
+   <appender name="FILEDEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/debug.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/%d{yyyy-MM-dd}/debug-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+          	<MaxHistory>30</MaxHistory>
+    	</rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+               %d %cn [%t] %-5p %c{36}.%M:%L - %m%n
+            </pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+    
+    <!-- redis日志-->
+    <appender name="redisLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+         <file>${LOG_HOME}/redis.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/%d{yyyy-MM-dd}/redis-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+          	<MaxHistory>30</MaxHistory>
+    	</rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+               %d %cn [%t] %-5p %c{36}.%M:%L - %m%n
+            </pattern>
+        </layout>
+    </appender>
+  
+  
+      <!-- 生产环境下，将此级别配置为适合的级别，以免日志文件太多或影响程序性能 -->
+  <root level="INFO">  
+       <appender-ref ref="STDOUT" /> 
+       <appender-ref ref="FILEERROR"/>
+       <appender-ref ref="FILEWARN"/>
+       <appender-ref ref="FILEINFO"/>
+       <appender-ref ref="FILEDEBUG"/>
+  </root>  
+  
+ <springProfile name="test,dev">  
+    <logger name="redisLogger" level="DEBUG"  additivity="false"> 
+         	  <appender-ref ref="redisLogFile"/>  
+    </logger>
+  	<logger name="org.springframework" level="warn" />  
+  	<logger name="org.apache.http" level="warn" />  
+  	 <logger name="cn.luxw" level="debug"/>
+  </springProfile> 
+  
+  
+ <springProfile name="beta,prod">  
+    <logger name="redisLogger" level="DEBUG"  additivity="false"> 
+         	  <appender-ref ref="redisLogFile"/>  
+    </logger>
+  	<logger name="org.springframework" level="warn" />  
+  	<logger name="org.apache.http" level="warn" />  
+    <logger name="cn.luxw" level="debug"/>
+ </springProfile> 
+  
+</configuration>  
