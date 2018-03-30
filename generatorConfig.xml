@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="MysqlContext" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+			<!--targetRuntime="MyBatis3Simple" 是否去除自动生成的注释 true：是 ： false:否 -->
+		
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+       <!--  <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="cn.luxw.util.generator.MyMapper"/>
+        </plugin> -->
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/iuniontrack_transfer"
+                        userId="root"
+                        password="">
+        </jdbcConnection>
+
+        <!-- 对于生成的pojo所在包 -->
+        <javaModelGenerator targetPackage="cn.luxw.app.domain.db" targetProject="src/main/java"/>
+
+		<!-- 对于生成的mapper所在目录 -->
+        <sqlMapGenerator targetPackage="cn.luxw.app.mapper" targetProject="src/main/resources"/>
+
+		<!-- 配置mapper对应的java映射 -->
+        <javaClientGenerator targetPackage="cn.luxw.app.mapper" targetProject="src/main/java" type="XMLMAPPER"/>
+
+
+		 <table tableName="sync_register_msg" ></table>
+		 <!-- <table tableName="bill" domainObjectName="Bill" enableSelectByExample="false"       
+                       enableDeleteByExample="false" 
+                       enableCountByExample= "false" 
+                       enableUpdateByExample="false"
+                       enableUpdateByPrimaryKey="false"
+                       enableInsert="true"
+                       enableDeleteByPrimaryKey="false">
+    	<property name="useActualColumnNames" value="true"/> 
+    </table>
+     -->
+<!--         <table tableName="%"> -->
+            <!--mysql 配置-->
+<!--             <generatedKey column="id" sqlStatement="Mysql" identity="true"/> -->
+            <!--oracle 配置-->
+            <!--<generatedKey column="id" sqlStatement="select SEQ_{1}.nextval from dual" identity="false" type="pre"/>-->
+<!--         </table> -->
+    </context>
+</generatorConfiguration>
