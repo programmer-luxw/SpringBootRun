@@ -14,7 +14,7 @@ public class StreamMap {
 
     public static void main(String[] args) {
 
-        /*List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 6, 7, 7, 1);
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 6, 7, 7, 1);
 
         List<Integer> result = list.stream().map(i -> i * 2).collect(toList());
 
@@ -25,7 +25,7 @@ public class StreamMap {
         List<String> dishes = listDish().stream().map(d -> d.getName()).collect(toList());
         System.out.println(dishes);
 
-        //flatmap flat (扁平化)*/
+        //flatmap flat (扁平化),多个流合成一个
 
         String[] words = {"Hello", "World"};
       
@@ -38,6 +38,8 @@ public class StreamMap {
         Stream<String> stringStream = stream.flatMap(Arrays::stream);
 
         stringStream.distinct().forEach(System.out::println);
+        
+        
 
     }
 

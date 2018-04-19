@@ -1,6 +1,3 @@
-/**
- * 
- */
 package cn.luxw.app.web;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;

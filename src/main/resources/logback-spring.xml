@@ -1,42 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="false" scanPeriod="60 seconds" debug="false">  
-<!-- Logback configuration. See http://logback.qos.ch/manual/index.html -->  
 
- <contextName>SpringBootRun</contextName>
-
-  <springProfile name="test,dev,beta">  
-    <property name="LOG_HOME" value="/data/logs/SpringBootRun/beta" />  
- </springProfile> 
- 
- <springProfile name="prod">  
-    <property name="LOG_HOME" value="/data/logs/SpringBootRun/release" />  
- </springProfile> 
+ <!--
+       说明：Logback configuration. See http://logback.qos.ch/manual/index.html 
+       1、日志级别及文件
+           日志记录采用分级记录，级别与日志文件名相对应，不同级别的日志信息记录到不同的日志文件中
+           例如：error级别记录到log_error_xxx.log或log_error.log（该文件为当前记录的日志文件），而log_error_xxx.log为归档日志，
+           日志文件按日期记录，同一天内，若日志文件大小等于或大于2M，则按0、1、2...顺序分别命名
+           例如log-level-2013-12-21.0.log
+           其它级别的日志也是如此。
+       2、文件路径
+           若开发、测试用，在Eclipse中运行项目，则到Eclipse的安装路径查找logs文件夹，以相对路径../logs。
+           若部署到Tomcat下，则在Tomcat下的logs文件中
+       3、Appender
+           FILEERROR对应error级别，文件名以log-error-xxx.log形式命名
+           FILEWARN对应warn级别，文件名以log-warn-xxx.log形式命名
+           FILEINFO对应info级别，文件名以log-info-xxx.log形式命名
+           FILEDEBUG对应debug级别，文件名以log-debug-xxx.log形式命名
+           stdout将日志信息输出到控制上，为方便开发测试使用
+    -->
+   <springProfile name="test,dev"> 
+    	<property name="LOG_HOME" value="/data/logs/SpringBootRun" />
+   </springProfile>
+   <springProfile name="beta"> 
+    	<property name="LOG_HOME" value="/data/logs/SpringBootRun/beta" />
+   </springProfile>
+   <springProfile name="prod"> 
+    	<property name="LOG_HOME" value="/data/logs/SpringBootRun/release" />
+    </springProfile>
+     <contextName>SpringBootRun</contextName>
     
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">  
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">  
 		  <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">  
 		        <pattern>  
-              <!--https://blog.csdn.net/u010311267/article/details/40213069 %date{yyyy-MM-dd HH:mm:ss.SSS} %level ${API_TYPE} %msg%n-->
-		          %d %cn [%t] %-5p %c{36}.%M:%L - %m%n
+		          <!-- %date [%thread] %-5level %logger{80} [%line] - %msg%n -->
+		            %d %cn [%t] %-5p %c{36}.%M:%L - %m%n
 		        </pattern>  
 		        <charset>UTF-8</charset> 
 		    </encoder>  
+		     <!--此日志appender是为开发使用，只配置最底级别，控制台输出的日志级别是大于或等于此级别的日志信息-->
 		    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">  
-		      <level>DEBUG</level>  
+		      <level>debug</level>  
 		    </filter>  
-  	</appender> 
+  </appender>  
   
-   
-   <!-- error log -->  
+    <!-- error log -->  
    <appender name="FILEERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
     	<!-- 正在记录的日志文件的路径及文件名 -->
         <file>${LOG_HOME}/error.log</file>
          <!-- 归档的日志文件的路径  除按日志记录之外，还配置了日志文件不能超过2M，若超过2M，日志文件会以索引0开始-->
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      		<!--<fileNamePattern>${LOG_HOME}/%d{yyyy-MM-dd}/error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      		 <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>1MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy> -->
+            
             <fileNamePattern>${LOG_HOME}/%d{yyyy-MM-dd}/error-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
           	<MaxHistory>30</MaxHistory>
     	</rollingPolicy>
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>
-               %d %cn [%t] %-5p %c{36}.%M:%L - %m%n
+              %d %cn [%t] %-5p %c{36}.%M:%L - %m%n
             </pattern>
         </layout>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -55,7 +79,7 @@
     	</rollingPolicy>
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>
-                %d %cn [%t] %-5p %c{36}.%M:%L - %m%n
+             %d %cn [%t] %-5p %c{36}.%M:%L - %m%n
             </pattern>
         </layout>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -93,7 +117,7 @@
     	</rollingPolicy>
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>
-               %d %cn [%t] %-5p %c{36}.%M:%L - %m%n
+              %d %cn [%t] %-5p %c{36}.%M:%L - %m%n
             </pattern>
         </layout>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -102,7 +126,6 @@
             <onMismatch>DENY</onMismatch>
         </filter>
     </appender>
-    
     <!-- redis日志-->
     <appender name="redisLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
          <file>${LOG_HOME}/redis.log</file>
@@ -112,13 +135,17 @@
     	</rollingPolicy>
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>
-               %d %cn [%t] %-5p %c{36}.%M:%L - %m%n
+              %d %cn [%t] %-5p %c{36}.%M:%L - %m%n
             </pattern>
         </layout>
     </appender>
+    
+    
   
+    
   
-      <!-- 生产环境下，将此级别配置为适合的级别，以免日志文件太多或影响程序性能 -->
+  <!-- Enable FILE and STDOUT appenders for all log messages.  By default, only log at level INFO and above. -->  
+  <!-- 生产环境下，将此级别配置为适合的级别，以免日志文件太多或影响程序性能 -->
   <root level="INFO">  
        <appender-ref ref="STDOUT" /> 
        <appender-ref ref="FILEERROR"/>
@@ -126,24 +153,33 @@
        <appender-ref ref="FILEINFO"/>
        <appender-ref ref="FILEDEBUG"/>
   </root>  
-  
- <springProfile name="test,dev">  
-    <logger name="redisLogger" level="DEBUG"  additivity="false"> 
-         	  <appender-ref ref="redisLogFile"/>  
-    </logger>
-  	<logger name="org.springframework" level="warn" />  
-  	<logger name="org.apache.http" level="warn" />  
-  	 <logger name="cn.luxw" level="debug"/>
+  <springProfile name="test,dev">  
+	   <logger name="redisLogger" level="DEBUG"  additivity="false"> 
+	         	  <appender-ref ref="redisLogFile"/>  
+	      </logger>
+	  	<logger name="org.springframework.web" level="warn" />  
+	  	<logger name="org.apache.http" level="warn" />  
+	    <logger name="cn.luxw.app" level="DEBUG" />  
+	   	<logger name="cn.luxw.app.mapper" level="DEBUG"/> 
   </springProfile> 
   
-  
- <springProfile name="beta,prod">  
-    <logger name="redisLogger" level="DEBUG"  additivity="false"> 
-         	  <appender-ref ref="redisLogFile"/>  
-    </logger>
-  	<logger name="org.springframework" level="warn" />  
-  	<logger name="org.apache.http" level="warn" />  
-    <logger name="cn.luxw" level="debug"/>
- </springProfile> 
+  <springProfile name="beta">  
+   		<logger name="redisLogger" level="DEBUG"  additivity="false"> 
+	         	  <appender-ref ref="redisLogFile"/>  
+	      </logger>
+	  	<logger name="org.springframework.web" level="warn" />  
+	  	<logger name="org.apache.http" level="warn" />  
+	    <logger name="cn.luxw.app" level="info" />  
+	   	<logger name="cn.luxw.app.mapper" level="info"/> 
+   </springProfile> 
+   <springProfile name="prod">  
+   		<logger name="redisLogger" level="DEBUG"  additivity="false"> 
+	         	  <appender-ref ref="redisLogFile"/>  
+	      </logger>
+	  	<logger name="org.springframework.web" level="warn" />  
+	  	<logger name="org.apache.http" level="warn" />  
+	    <logger name="cn.luxw.app" level="info" />  
+	   	<logger name="cn.luxw.app.mapper" level="info"/> 
+   </springProfile> 
   
 </configuration>  

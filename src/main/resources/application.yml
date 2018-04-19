@@ -1,12 +1,17 @@
 spring:
+  application:
+    name: july-leaning
   profiles:
-    active:
-    - dev
+    active: dev
 
 
+    
 debug: false
 
 #Acutator
+#logging:
+#  level:
+#    root: info
 #management.server.port=8081
 #management.endpoints.web.expose=*
 #management.endpoints.web.base-path=/manage

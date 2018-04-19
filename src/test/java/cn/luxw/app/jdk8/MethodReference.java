@@ -79,7 +79,7 @@ public class MethodReference {
         list.stream().forEach(System.out::println);
 
         int value = Integer.parseInt("123");
-
+      
         //静态方法推导1,
         Function<String, Integer> f = Integer::parseInt;
 
@@ -123,8 +123,10 @@ public class MethodReference {
         List<Apple> list2 = Arrays.asList(new Apple("abc", 123), new Apple("Green", 110), new Apple("red", 123));
 
         System.out.println(list2);
-        //Function<Apple,String> ff = Apple::getColor;
+        
+        Function<Apple,String> GGG = Apple::getColor;
         list2.sort(Comparator.comparing(Apple::getColor));
+        list2.sort((a1, a2) -> a1.getColor().compareTo(a2.getColor()));
         System.out.println(list2);
     }
 

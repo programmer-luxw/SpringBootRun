@@ -18,7 +18,7 @@ public class OptionalUsage {
 
         Optional<Insurance> insuranceOptional1 = Optional.of(new Insurance());
 
-        /*insuranceOptional1.get();
+        insuranceOptional1.get();
 
         Optional<Insurance> objectOptional = Optional.ofNullable(null);
 
@@ -29,7 +29,7 @@ public class OptionalUsage {
         objectOptional.orElseThrow(RuntimeException::new);
 
         objectOptional.orElseThrow(() -> new RuntimeException("Not have reference"));
-*/
+
 /*
         Insurance insurance = insuranceOptional1.filter(i -> i.getName() != null).get();
         System.out.println(insurance);*/

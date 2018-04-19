@@ -35,6 +35,9 @@ public class LambdaExpression {
         
         //传入string,传出Integer
         Function<String, Integer> flambda = s -> s.length();
+        Function<String, Integer> flambda2 = String::length;
+        
+        
         Function<Integer,String> b = (Integer i) -> i.toString();
         
         //传入apple,返回boolean

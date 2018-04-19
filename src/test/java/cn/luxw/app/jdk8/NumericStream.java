@@ -21,7 +21,7 @@ public class NumericStream {
         int a = 9;
 
         //1..1000
-        //result int[a,b,c];
+        //result int[a,b,c];c
 
         IntStream.rangeClosed(1, 100)
                 .filter(b -> Math.sqrt(a * a + b * b) % 1 == 0)

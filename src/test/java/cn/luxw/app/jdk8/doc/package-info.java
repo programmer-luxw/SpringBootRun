@@ -35,3 +35,4 @@ package cn.luxw.app.jdk8.doc;
 		stream4.forEach(System.out::println);
 		
 	}*/
+
