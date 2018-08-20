@@ -4,9 +4,12 @@ package cn.luxw.app.guava.utilities;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Charsets;
 import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
+
 import org.junit.Test;
 
 import java.nio.charset.Charset;
+import java.util.Map;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNull.nullValue;
@@ -31,6 +34,7 @@ public class StringsTest {
         assertThat(Strings.isNullOrEmpty(null), equalTo(true));
         assertThat(Strings.isNullOrEmpty(""), equalTo(true));
 
+        	//不够长度，就填充
         assertThat(Strings.padStart("Alex", 3, 'H'), equalTo("Alex"));
         assertThat(Strings.padStart("Alex", 5, 'H'), equalTo("HAlex"));
         assertThat(Strings.padEnd("Alex", 5, 'H'), equalTo("AlexH"));
@@ -60,4 +64,13 @@ public class StringsTest {
     public Integer text(){
         return 0;
     }
+    
+    public static void main(String[] args) {
+		Map<String,Object> map = Maps.newHashMap();
+		String key = "abc";
+		map.put(key, "9999");
+		map.computeIfAbsent(key, v->"jlajd");
+		System.out.println(map.get(key));
+		
+	}
 }

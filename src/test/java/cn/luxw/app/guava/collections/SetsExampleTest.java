@@ -50,7 +50,7 @@ public class SetsExampleTest
 
     @Test
     public void testCombinations()
-    {
+    {	//子集，子集里面的大小
         HashSet<Integer> set = Sets.newHashSet(1, 2, 3);
         Set<Set<Integer>> combinations = Sets.combinations(set, 2);
         combinations.forEach(System.out::println);

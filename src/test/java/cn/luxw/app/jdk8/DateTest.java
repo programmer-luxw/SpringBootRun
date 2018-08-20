@@ -65,7 +65,7 @@ public class DateTest {
     private static void combineLocalDateAndTime() {
         LocalDate localDate = LocalDate.now();
         LocalTime time = LocalTime.now();
-
+        
         LocalDateTime localDateTime = LocalDateTime.of(localDate, time);
         System.out.println(localDateTime.toString());
         LocalDateTime now = LocalDateTime.now();

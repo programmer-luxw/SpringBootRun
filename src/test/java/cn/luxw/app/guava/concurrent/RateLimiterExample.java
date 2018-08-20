@@ -4,9 +4,11 @@ package cn.luxw.app.guava.concurrent;
 import com.google.common.util.concurrent.RateLimiter;
 
 import java.util.concurrent.*;
+import java.util.function.Consumer;
 import java.util.stream.IntStream;
 
 import static java.lang.Thread.currentThread;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 /***************************************
  * @author:Alex Wang
@@ -21,6 +23,7 @@ public class RateLimiterExample
 
     public static void main(String[] args)
     {
+    	Consumer<Integer> consumer = v->{System.out.println(v);};
         ExecutorService service = Executors.newFixedThreadPool(10);
         IntStream.range(0, 10).forEach(i ->
                 service.submit(RateLimiterExample::testSemaphore)

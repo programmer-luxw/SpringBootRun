@@ -70,7 +70,7 @@ public class JoinerTest {
     public void testJoin_On_Append_To_StringBuilder() {
         final StringBuilder builder = new StringBuilder();
         StringBuilder resultBuilder = Joiner.on("#").useForNull("DEFAULT").appendTo(builder, stringListWithNullValue);
-        assertThat(resultBuilder, sameInstance(builder));
+        assertThat(resultBuilder, sameInstance(builder));//两个容器相同
         assertThat(resultBuilder.toString(), equalTo("Google#Guava#Java#Scala#DEFAULT"));
         assertThat(builder.toString(), equalTo("Google#Guava#Java#Scala#DEFAULT"));
     }

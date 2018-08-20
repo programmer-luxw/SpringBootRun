@@ -1,9 +1,16 @@
 package cn.luxw.app.guava.collections;
 
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
+import com.google.common.collect.Multiset;
+import com.google.common.collect.TreeMultimap;
+
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -23,6 +30,10 @@ public class MultimapsExampleTest
     @Test
     public void testBasic()
     {
+    	//Multiset<String> multiset = HashMultiset.create();
+    	//TreeMultimap.create();
+    	//Multimap<String, String> multimap a = HashMultimap.create();
+    	// Multimap<String, String> multimap = ArrayListMultimap.create();
         LinkedListMultimap<String, String> multipleMap = LinkedListMultimap.create();
         HashMap<String, String> hashMap = Maps.newHashMap();
         hashMap.put("1", "1");

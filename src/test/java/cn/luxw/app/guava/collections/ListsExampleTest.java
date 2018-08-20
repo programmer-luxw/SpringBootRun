@@ -24,7 +24,7 @@ public class ListsExampleTest
 
     @Test
     public void testCartesianProduct()
-    {
+    {//笛卡尔积
 
         List<List<String>> result = Lists.cartesianProduct(
                 Lists.newArrayList("1", "2"),

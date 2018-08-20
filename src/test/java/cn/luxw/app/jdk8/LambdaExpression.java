@@ -8,6 +8,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 /**
  * Created by wangwenjun on 2016/10/12.
@@ -54,7 +55,6 @@ public class LambdaExpression {
       //格式
        // (param)->expression 返回值可以推导出来
         //(param) ->{expression;} 如果有return 关键字,必须有{}和;
-        
         
         
     }

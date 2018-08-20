@@ -11,11 +11,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import static java.lang.Thread.currentThread;
 
-/***************************************
- * @author:Alex Wang
- * @Date:2017/11/6
- * 532500648
- ***************************************/
+
 public class MonitorExample
 {
 
@@ -176,8 +172,8 @@ public class MonitorExample
                 while (queue.size() >= MAX)
                 {
                     try
-                    {
-                        queue.wait();
+                    {	//并且应该在synchronized的函数或者对象里面使用wait
+                        queue.wait();//对在多线程共享的Object来使用wait,这个Object就是缓存区队列
                     } catch (InterruptedException e)
                     {
                         e.printStackTrace();

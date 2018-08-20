@@ -1,6 +1,14 @@
 package cn.luxw.app.jdk8;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
+
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 
 /***************************************
  * @author:Alex Wang
@@ -10,6 +18,32 @@ import java.util.concurrent.atomic.AtomicReference;
 public class FutureInAction {
     public static void main(String[] args) throws InterruptedException {
 
+    	ExecutorService es1 = Executors.newFixedThreadPool(2);
+    	ExecutorService es2 = Executors.newSingleThreadExecutor();
+    	ListeningExecutorService es = MoreExecutors.listeningDecorator(es1);
+    	ListenableFuture<String> future = es.submit(()->{
+    		  try {
+    			  System.out.println("------===---");
+                  Thread.sleep(3000);
+                  return "I am finished.";
+              } catch (InterruptedException e) {
+                  return "Error";
+              }
+          });
+    	
+//    	future.addListener(listener, executor);
+    	//future.addListener(listener, es);
+    	Futures.addCallback(future, new FutureCallbackImpl(), es2);
+    	System.out.println("======aaa========");
+    	es.shutdown();
+    	es1.shutdown();
+    	//es2.shutdown();
+    	
+    	
+    	//es1.shutdown();
+    	//es2.shutdown();
+    	System.out.println("======bbb========");
+    	
      /*   Future<String> future = invoke(() -> {
             try {
                 Thread.sleep(10000);
@@ -28,7 +62,7 @@ public class FutureInAction {
         }
         System.out.println(future.get());*/
 
-        String value = block(() -> {
+      /*  String value = block(() -> {
             try {
                 Thread.sleep(10000);
                 return "I am finished.";
@@ -36,8 +70,30 @@ public class FutureInAction {
                 return "Error";
             }
         });
-        System.out.println(value);
+        System.out.println(value);*/
     }
+    
+    /**
+	 * 回调方法
+	 * 
+	 * @author luxw
+	 * @version 1.0,2014-9-18 上午11:44:52
+	 */
+	private static class FutureCallbackImpl implements FutureCallback<String> {
+
+		@Override
+		public void onSuccess(String result) {
+			System.err.println("==onSuccess=="+result);
+			
+		}
+
+		@Override
+		public void onFailure(Throwable t) {
+			System.err.println("==onFailure=="+t);
+			
+		}
+		
+	}
 
     private static <T> T block(Callable<T> callable) {
         return callable.action();

@@ -201,14 +201,14 @@ public class FilesTest {
         files.stream().forEach(System.out::println);
     }
 
-    @Test
+    @Test//倒序
     public void testTreeFilesPostOrderTraversal() {
         File root = new File("C:\\Users\\wangwenjun\\IdeaProjects\\guava_programming\\src\\main");
         FluentIterable<File> files = Files.fileTreeTraverser().postOrderTraversal(root);
         files.stream().forEach(System.out::println);
     }
 
-    @Test
+    @Test//
     public void testTreeFilesBreadthFirstTraversal() {
         File root = new File("C:\\Users\\wangwenjun\\IdeaProjects\\guava_programming\\src\\main");
         FluentIterable<File> files = Files.fileTreeTraverser().breadthFirstTraversal(root);

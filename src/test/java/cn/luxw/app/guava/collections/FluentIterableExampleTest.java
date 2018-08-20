@@ -113,7 +113,7 @@ public class FluentIterableExampleTest
 
     @Test
     public void testCycle()
-    {
+    {//滚动，复制里面的元素
         FluentIterable<String> fit = build();
         FluentIterable<String> cycle = fit.cycle().limit(20);
         cycle.forEach(System.out::println);
@@ -121,7 +121,7 @@ public class FluentIterableExampleTest
 
     @Test
     public void testTransform()
-    {
+    {//
         FluentIterable<String> fit = build();
         fit.transform(e -> e.length()).forEach(System.out::println);
     }

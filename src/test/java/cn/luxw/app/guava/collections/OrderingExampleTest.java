@@ -59,6 +59,7 @@ public class OrderingExampleTest
     {
         List<Integer> list = Arrays.asList(1, 5, 3, 8, 2);
         Collections.sort(list);
+        
         assertThat(Ordering.natural().isOrdered(list), is(true));
     }
 

@@ -7,7 +7,7 @@ import java.util.Map;
 public interface TestService {
 
 	
-	
+	 String findOne(String name);
 	
 	final Map<String, String> newsEventMap = new HashMap<String, String>(){{  
 			put("k1","v1");  

@@ -10,11 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-/***************************************
- * @author:Alex Wang
- * @Date:2017/10/14
- * @QQ: 532500648
- ***************************************/
+
 public class CloserTest {
 
     @Test
