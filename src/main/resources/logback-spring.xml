@@ -146,7 +146,16 @@
   
     
   
-  <!-- Enable FILE and STDOUT appenders for all log messages.  By default, only log at level INFO and above. -->  
+  <!-- https://my.oschina.net/looly/blog/298675
+   logger用来设置某一个包或者具体的某一个类的日志打印级别、以及指定<appender>。<loger>仅有一个name属性，一个可选的level和一个可选的addtivity属性。
+   也是<loger>元素，但是它是根loger。只有一个level属性，应为已经被命名为"root".
+   <loger>和<root>可以包含零个或多个<appender-ref>元素，标识这个appender将会添加到这个loger。
+   没有设置addtivity，默认为true，将此loger的打印信息向上级传递； 
+   没有设置appender，此loger本身不打印任何信息,
+  如果addtivity=true, root接到下级传递的信息，交给已经配置好的名为“STDOUT”的appender处理，“STDOUT”appender将信息打印到控制台
+   
+   
+  Enable FILE and STDOUT appenders for all log messages.  By default, only log at level INFO and above. -->  
   <!-- 生产环境下，将此级别配置为适合的级别，以免日志文件太多或影响程序性能 -->
   <root level="INFO">  
        <appender-ref ref="STDOUT" /> 
@@ -155,10 +164,12 @@
        <appender-ref ref="FILEINFO"/>
        <appender-ref ref="FILEDEBUG"/>
   </root>  
+  
+  
   <springProfile name="dev">  
 	   <logger name="redisLogger" level="DEBUG"  additivity="false"> 
-	         	  <appender-ref ref="redisLogFile"/>  
-	      </logger>
+	        <appender-ref ref="redisLogFile"/>  
+	   </logger>
 	  	<logger name="org.springframework.web" level="warn" />  
 	  	<logger name="org.apache.http" level="debug" />  
 	  	<logger name="org.apache.http.impl.conn.PoolingHttpClientConnectionManager" level="info" />  
