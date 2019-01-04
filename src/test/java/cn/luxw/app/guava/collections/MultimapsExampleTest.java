@@ -1,22 +1,15 @@
 package cn.luxw.app.guava.collections;
 
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.HashMultiset;
-import com.google.common.collect.LinkedListMultimap;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
-import com.google.common.collect.Multiset;
-import com.google.common.collect.TreeMultimap;
-
-import org.junit.Test;
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.Assert.assertThat;
 
 import java.util.HashMap;
 
-import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.*;
+import org.junit.Test;
+
+import com.google.common.collect.LinkedListMultimap;
+import com.google.common.collect.Maps;
 
 /***************************************
  * @author:Alex Wang

@@ -1,9 +1,7 @@
 package cn.luxw.app.util.wx;
 
 
-import com.google.common.base.Charsets;
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
 
 /**
  * XML转换

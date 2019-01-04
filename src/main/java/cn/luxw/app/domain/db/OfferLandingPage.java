@@ -5,19 +5,19 @@ public class OfferLandingPage {
 
     private String name;
 
-    private Integer offer_id;
+    private Integer offerId;
 
     private Byte status;
 
-    private String preview_url;
+    private String previewUrl;
 
-    private String destination_url;
+    private String destinationUrl;
 
-    private Integer partner_id;
+    private Integer partnerId;
 
-    private Integer create_time;
+    private Integer createTime;
 
-    private Integer update_time;
+    private Integer updateTime;
 
     public Integer getId() {
         return id;
@@ -35,12 +35,12 @@ public class OfferLandingPage {
         this.name = name;
     }
 
-    public Integer getOffer_id() {
-        return offer_id;
+    public Integer getOfferId() {
+        return offerId;
     }
 
-    public void setOffer_id(Integer offer_id) {
-        this.offer_id = offer_id;
+    public void setOfferId(Integer offerId) {
+        this.offerId = offerId;
     }
 
     public Byte getStatus() {
@@ -51,43 +51,43 @@ public class OfferLandingPage {
         this.status = status;
     }
 
-    public String getPreview_url() {
-        return preview_url;
+    public String getPreviewUrl() {
+        return previewUrl;
     }
 
-    public void setPreview_url(String preview_url) {
-        this.preview_url = preview_url;
+    public void setPreviewUrl(String previewUrl) {
+        this.previewUrl = previewUrl;
     }
 
-    public String getDestination_url() {
-        return destination_url;
+    public String getDestinationUrl() {
+        return destinationUrl;
     }
 
-    public void setDestination_url(String destination_url) {
-        this.destination_url = destination_url;
+    public void setDestinationUrl(String destinationUrl) {
+        this.destinationUrl = destinationUrl;
     }
 
-    public Integer getPartner_id() {
-        return partner_id;
+    public Integer getPartnerId() {
+        return partnerId;
     }
 
-    public void setPartner_id(Integer partner_id) {
-        this.partner_id = partner_id;
+    public void setPartnerId(Integer partnerId) {
+        this.partnerId = partnerId;
     }
 
-    public Integer getCreate_time() {
-        return create_time;
+    public Integer getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(Integer create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(Integer createTime) {
+        this.createTime = createTime;
     }
 
-    public Integer getUpdate_time() {
-        return update_time;
+    public Integer getUpdateTime() {
+        return updateTime;
     }
 
-    public void setUpdate_time(Integer update_time) {
-        this.update_time = update_time;
+    public void setUpdateTime(Integer updateTime) {
+        this.updateTime = updateTime;
     }
 }

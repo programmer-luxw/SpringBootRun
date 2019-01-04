@@ -1,10 +1,14 @@
 package cn.luxw.app.web.controller;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import cn.luxw.app.util.JsonUtil;
 
 
 /**
@@ -21,6 +25,8 @@ public class InfosController {
 	
 	@Value("${spring.profiles.active}") 
 	private String environment;
+	@Autowired
+	private EhCacheCacheManager ehCacheCacheManager;
 	/**
 	 *该接口提供给运营监控,勿修改
 	 * @return
@@ -31,17 +37,19 @@ public class InfosController {
 		return "net-"+environment;
 	 }
 	
-	/* @GetMapping("/ehcache")
+	@GetMapping("/ehcache")
 	 public Object getCahce(String key) {
-		 Element e = ehCacheCacheManager.getCacheManager().getCache("longtimecache").get(key);
-		 if(e== null) {
-			 System.out.println("null--==--");
-		 }else {
-			return JsonUtils.toString(e);
-		 }
+	 ehCacheCacheManager.getCache("longtimecache").evict(key);
+		//CacheManager c = ehCacheCacheManager.getCacheManager();
+//		 Element e = ehCacheCacheManager.getCacheManager().getCache("longtimecache").get(key);
+//		 if(e== null) {
+//			 System.out.println("null--==--");
+//		 }else {
+//			return JsonUtil.toString(e);
+//		 }
 		 return null;
 	 }
-	*/
+	
 	private void  test() {
 		
 			Thread t = new Thread(()-> {

@@ -51,7 +51,7 @@
                        enableDeleteByExample="false" 
                        enableCountByExample= "false" 
                        enableUpdateByExample="false">
-    	<property name="useActualColumnNames" value="true"/> 
+    	<property name="useActualColumnNames" value="false"/> 
     </table>
      
 <!--         <table tableName="%"> -->
