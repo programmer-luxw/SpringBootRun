@@ -21,7 +21,13 @@ import static org.junit.Assert.assertThat;
  ***************************************/
 public class SetsExampleTest
 {
-
+	// Set<String> set1 = readFile4List(new File("D:/B/1.txt"));
+         //Set<String> set2 = readFile4List(new File("D:/B/DB.txt"));
+	         
+	        // Set<String> result1 = Sets.union(set1, set2);//合集，并集
+	        // Set<String> result2 = Sets.intersection(set1, set2);//交集
+	        // Set<String> result3 = Sets.difference(set1, set2);//差集 1中有而2中没有的
+	         // Set<String> result4 = Sets.symmetricDifference(set1, set2);//相对差集 1中有2中没有  2中有1中没有的 取出来
     @Test
     public void testCreate()
     {

@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestControllerAdvice
 public class GlobalException {
-
+	//BindException
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public void test(MethodArgumentNotValidException e) {
 		log.debug("[Global Error]:",e);
