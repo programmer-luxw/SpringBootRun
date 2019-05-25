@@ -31,6 +31,7 @@ public class OkHttpUtil {
 	static {
 		client = new OkHttpClient.Builder()
 				//.sslSocketFactory(sslSocketFactory(), x509TrustManager())//
+//				.hostnameVerifier(verifiedAllHostname)
 				//.retryOnConnectionFailure(false)//是否开启缓存
 				.retryOnConnectionFailure(false)//
 				.connectionPool(pool())//
