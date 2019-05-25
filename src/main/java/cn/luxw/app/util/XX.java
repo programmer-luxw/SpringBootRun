@@ -3,10 +3,12 @@ package cn.luxw.app.util;
 import java.io.IOException;
 import java.nio.CharBuffer;
 
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.async.Callback;
-import com.mashape.unirest.http.exceptions.UnirestException;
+import kong.unirest.Callback;
+import kong.unirest.HttpResponse;
+import kong.unirest.Unirest;
+import kong.unirest.UnirestException;
+
+
 
 public class XX<T> implements Callback<T> {
 
@@ -14,8 +16,8 @@ public class XX<T> implements Callback<T> {
 	public void completed(HttpResponse<T> response) {
 		System.out.println(")))=" + response.getBody());
 		try {
-			Unirest.shutdown();
-		} catch (IOException e) {
+			Unirest.shutDown();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

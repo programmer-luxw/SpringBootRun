@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
+
 
 import cn.luxw.app.service.TestService;
 import cn.luxw.app.service.UserService;
+import kong.unirest.Unirest;
+import kong.unirest.UnirestException;
 
 @RestController
 @RequestMapping("/index")

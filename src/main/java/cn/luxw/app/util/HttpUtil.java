@@ -27,7 +27,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Maps;
-import com.mashape.unirest.http.utils.MapUtil;
+
+import kong.unirest.Unirest;
 
 
 /**
@@ -156,10 +157,12 @@ public class HttpUtil {
 	}
 	
 	public static void main(String[] args) {
-		String url = "https://www.baidu.com";
-		Map<String,Object> params = Maps.newHashMap();
-		String t = get(url, params);
-		System.out.println(t);
+		// Sending a JSON object
+		Unirest.post("http://httpbin.org/authors/post")
+		        .header("accept", "application/json")
+		        .header("Content-Type", "application/json")
+		        .body("")
+		        .asJson();
 	}
 
 }

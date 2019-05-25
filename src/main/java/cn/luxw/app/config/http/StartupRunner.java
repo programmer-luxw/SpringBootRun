@@ -29,7 +29,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
-import com.mashape.unirest.http.Unirest;
+import kong.unirest.Unirest;
+
 
 //@Order(value = 5)
 //@Configuration//
@@ -104,7 +105,7 @@ public class StartupRunner implements CommandLineRunner {
 				//.setDefaultRequestConfig(requestConfig)//
 				.build();
 				//.setMaxConnTotal(maxConnTotal).setMaxConnPerRoute(maxConnPerRoute)//
-		Unirest.setHttpClient(httpclient);
+		Unirest.config().httpClient(httpclient);
 		//Unirest.get("").asString().getBody();
 	}
 	
