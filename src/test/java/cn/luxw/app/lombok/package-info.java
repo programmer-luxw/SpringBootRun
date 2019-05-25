@@ -28,18 +28,7 @@ public class Shape {
     private double y;
     @NonNull
     private String name;
-}1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-
-
+}
 实际效果相当于：
 public class Shape {
     private int x;

@@ -3,7 +3,7 @@ package cn.luxw.app.util;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class JodaUtils {
 	public static void main(String[] args) {

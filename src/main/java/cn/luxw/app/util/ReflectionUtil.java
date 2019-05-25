@@ -8,7 +8,7 @@ import com.google.common.base.CharMatcher;
 import com.google.common.collect.Sets;
 
 public final class ReflectionUtil {
-	private static CharMatcher matcher = CharMatcher.JAVA_UPPER_CASE.or(CharMatcher.is('_'));
+	private static CharMatcher matcher = CharMatcher.javaUpperCase().or(CharMatcher.is('_'));
 	
 	public static <T> Set<String> getFieldNames(Class<T> genericClass) {
 		Set<String> fieldNames = Sets.newLinkedHashSet();

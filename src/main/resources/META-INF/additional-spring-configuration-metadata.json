@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "july.str",
+    "type": "java.lang.String",
+    "description": "A description for 'july.str'"
+  },
+  {
+    "name": "july.number",
+    "type": "java.lang.String",
+    "description": "A description for 'july.number'"
+  }
+]}

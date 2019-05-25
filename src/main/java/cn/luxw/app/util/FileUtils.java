@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Throwables;
+import com.google.common.hash.Hashing;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.Closeables;
 import com.google.common.io.Files;
@@ -87,9 +88,18 @@ public class FileUtils {
 		}
 		return result;
 	}
+	//aa==49208657bf1ebb43c0bb6a0849c0334bf8d6a1458b232f84c3e585645ce3953b
+			//rr==36bbe50ed96841d10443bcb670d6554f0a34b761be67ec9c4a8ad2c0c44ca42c
+//			cc==b8bb96f491d036208ceccf4ba0eec7c5
 	
-	
-	
+	public static void main(String[] args) {
+		String aa =Hashing.goodFastHash(129).hashString("abcde", Charsets.UTF_8).toString();
+		String rr = Hashing.sha256().hashString("abcde", Charsets.UTF_8).toString();
+		String cc = Hashing.murmur3_128().newHasher().putString("abcde", Charsets.UTF_8).hash().toString();
+		System.out.println("aa=="+aa);
+		System.out.println("rr=="+rr);
+		System.out.println("cc=="+cc);
+	}
 	
 	
 	
