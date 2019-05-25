@@ -85,8 +85,8 @@ public class MethodReference {
 
         Integer result = f.apply("123");
         System.out.println(result);
-
-        // BiFunction<String, Integer, Character> ff= (x,y)->x.charAt(y);
+//"xx".charAt(index)
+         //BiFunction<String, Integer, Character> ff= (x,y)->x.charAt(y);
         BiFunction<String, Integer, Character> f2 = String::charAt;
         Character c = f2.apply("hello", 2);
         System.out.println(c);

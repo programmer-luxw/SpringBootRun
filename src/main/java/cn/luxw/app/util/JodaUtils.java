@@ -7,6 +7,10 @@ import org.junit.Test;
 
 public class JodaUtils {
 	public static void main(String[] args) {
+		//上个月月初
+		long t = DateTime.now().minusMonths(1).dayOfMonth().withMinimumValue().withTimeAtStartOfDay().getMillis()/1000;
+		System.out.println(t);
+		
 		String time2 = DateTime.now().toString("yyyy-MM-dd");
 		System.out.println(time2);
 	}
