@@ -139,7 +139,7 @@ public class OkHttpUtil {
 
 	public static String post(String url, Map<String, String> params) {
 		FormBody.Builder builder = new FormBody.Builder();
-		if (params != null && params.keySet().size() > 0) {
+		if (params != null && params.size() > 0) {
 			params.forEach((k,v)->builder.add(k, v));
 		}
 		Request request = new Request.Builder().url(url).post(builder.build()).build();
