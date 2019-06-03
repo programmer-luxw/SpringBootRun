@@ -16,9 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class StopWatchExample {
     private final static Logger LOGGER = LoggerFactory.getLogger(StopWatchExample.class);
 
-    public static void main(String[] args) throws InterruptedException {
-        process("3463542353");
-    }
+  
 
     /**
      * drools
@@ -37,4 +35,11 @@ public class StopWatchExample {
          *
          */
     }
+    
+    public static void main(String[] args) throws Exception {
+    	  Stopwatch stopwatch = Stopwatch.createStarted();
+    	  Thread.sleep(1200);
+    	  System.out.println(stopwatch.stop().elapsed(TimeUnit.MILLISECONDS));
+    	  
+	}
 }

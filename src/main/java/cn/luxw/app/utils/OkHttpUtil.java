@@ -10,7 +10,9 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
@@ -27,11 +29,17 @@ import okhttp3.Response;
 
 public class OkHttpUtil {
 
+//	 HostnameVerifier DO_NOT_VERIFY = new HostnameVerifier() {
+//	        @Override
+//	        public boolean verify(String hostname, SSLSession session) {
+//	            return true;
+//	        }
+//	    };
 	private static OkHttpClient client = null;
 	static {
 		client = new OkHttpClient.Builder()
-				//.sslSocketFactory(sslSocketFactory(), x509TrustManager())//
-//				.hostnameVerifier(verifiedAllHostname)
+				.sslSocketFactory(sslSocketFactory(), x509TrustManager())//
+				.hostnameVerifier((hostname,session)->true)
 				//.retryOnConnectionFailure(false)//是否开启缓存
 				.retryOnConnectionFailure(false)//
 				.connectionPool(pool())//
@@ -42,9 +50,13 @@ public class OkHttpUtil {
 //				.addInterceptor(new NbTokenInterceptor())//拦截器
 				.build();//
 	}
+	
+	
+	
+	
 
 	// @Bean
-	public X509TrustManager x509TrustManager() {
+	public static X509TrustManager x509TrustManager() {
 		return new X509TrustManager() {
 			@Override
 			public void checkClientTrusted(X509Certificate[] x509Certificates, String s) throws CertificateException {
@@ -60,11 +72,12 @@ public class OkHttpUtil {
 	}
 
 	// @Bean
-	public SSLSocketFactory sslSocketFactory() {
+	public static SSLSocketFactory sslSocketFactory() {
 		try {
+			//new SecureRandom()
 			// 信任任何链接
 			SSLContext sslContext = SSLContext.getInstance("TLS");
-			sslContext.init(null, new TrustManager[] { x509TrustManager() }, new SecureRandom());
+			sslContext.init(null, new TrustManager[] { x509TrustManager() }, null);
 			return sslContext.getSocketFactory();
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();

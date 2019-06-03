@@ -101,7 +101,7 @@ public class StartupRunner implements CommandLineRunner {
 				//.setSSLContext(sslContext)//
 				.setSSLSocketFactory(sslsf)
 				//校验名称,这个对象就是信任所有的主机,也就是信任所有https的请求
-				//.setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)//
+				.setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)//
 				//.setDefaultRequestConfig(requestConfig)//
 				.build();
 				//.setMaxConnTotal(maxConnTotal).setMaxConnPerRoute(maxConnPerRoute)//

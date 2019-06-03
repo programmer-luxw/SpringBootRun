@@ -6,9 +6,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.Base64;
+import java.util.Map;
+import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Charsets;
+import com.google.common.base.Joiner;
+import com.google.common.collect.Maps;
+
+import cn.hutool.core.util.StrUtil;
 
 public class BaseUtils {
 	
@@ -51,5 +60,36 @@ public class BaseUtils {
 	public static String decode64(String decodeStr){
 		return new String(Base64.getDecoder().decode(decodeStr), Charsets.UTF_8);
 	}
+	
+	  /**
+     * 按key进行正序排列，之间以&相连
+     * 忽略key=sign value为空的情况
+     * @param o
+     * @return
+     */
+    private static String getSignStr(Object o){
+        Map<String, Object> map = Maps.newTreeMap();
+        try {
+            Field[] fields = o.getClass().getDeclaredFields();
+            for (Field field : fields) {
+                field.setAccessible(Boolean.TRUE);
+                String signString = field.getName();
+                //final字段排除，为NULL的排除，sign排除
+                if(!Modifier.isFinal(field.getModifiers()) && !Objects.equals("sign", signString) && field.get(o)!=null){
+                    String fieldName = field.getName();
+                    JsonProperty jsonProperty = field.getAnnotation(JsonProperty.class);
+                    if(Objects.nonNull(jsonProperty) && StrUtil.isNotBlank(jsonProperty.value())){
+                        fieldName = jsonProperty.value();
+                    }
+                    map.put(fieldName,field.get(o));
+                }
+            }
+            String requestStr = Joiner.on("&").withKeyValueSeparator("=").join(map);
+            return requestStr;
+        } catch (Exception ex) {
+            //TODO
+        	return null;
+        }
+    }
 
 }

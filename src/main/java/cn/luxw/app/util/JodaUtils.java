@@ -3,7 +3,6 @@ package cn.luxw.app.util;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import org.junit.Test;
 
 public class JodaUtils {
 	public static void main(String[] args) {
@@ -52,7 +51,6 @@ public class JodaUtils {
 		System.out.println(in.dayOfMonth().getMaximumValue());// 当月day里面最大的值
 	}
 
-	@Test
 	public void test2() {
 		DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");// 自定义日期格式
 	
@@ -66,7 +64,6 @@ public class JodaUtils {
 
 	}
 
-	@Test
 	public void test3() {
 		DateTime dt = new DateTime(2014, 1, 1, 1, 1);
 		int t = dt.dayOfYear().getMaximumValue();
@@ -75,7 +72,6 @@ public class JodaUtils {
 		System.out.println(tt);
 	}
 	
-	@Test
 	public void test4() {
 		DateTime dateTime = new DateTime(2000, 1, 1, 0, 0, 0, 0);
 		System.out.println(dateTime.plusDays(90).toString("yyyy-MM-dd HH:mm:ss"));

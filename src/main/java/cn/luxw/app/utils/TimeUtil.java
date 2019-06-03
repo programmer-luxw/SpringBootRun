@@ -1,7 +1,9 @@
 package cn.luxw.app.utils;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
@@ -59,5 +61,15 @@ public class TimeUtil {
     public static String format(Instant instant, ZoneId zoneId, String pattern){
 		return format(instant, zoneId, pattern, Locale.getDefault(Locale.Category.FORMAT));
 	}
+    
+    /**
+           * 设置凌晨0
+     * @param key
+     */
+    private void setRedisExpireAtMidnight(String key){
+        LocalDateTime localDateTime = LocalDateTime.of(LocalDate.now(), LocalTime.MAX);
+        ZoneId zone = ZoneId.systemDefault();
+        Instant instant = localDateTime.atZone(zone).toInstant();
+    }
 
 }
