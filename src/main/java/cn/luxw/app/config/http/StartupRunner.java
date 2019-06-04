@@ -124,8 +124,6 @@ public class StartupRunner implements CommandLineRunner {
 		String mo = "159 66- 我 9 93311";
 		String r = CharMatcher.inRange('0', '9').retainFrom(mo);
 		//String r = CharMatcher.digit().retainFrom(mo);
-
-
 		//String r = mo.replaceAll("\\s*|-", "");
 		System.out.println(r);
 	}
