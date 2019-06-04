@@ -1,6 +1,8 @@
 package cn.luxw.app.apply;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -36,10 +38,13 @@ public class Jdk8Apply {
 //	                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
 //	                .forEachOrdered(x -> sortedMap.put(x.getKey(), x.getValue()));
 //	        return sortedMap;
+		 List<String> list = null;
+		// Map<String, String> memberMap = list.stream().collect(HashMap::new, (m,v)-> m.put(v.getId(), v.getImgPath()),HashMap::putAll);
+		   //Map.Entry.comparingByValue()
 		 return null;
 	    }
-	
-	 
+//	 Map<String,QmAppUserBankcard> dbCardInfoMap = list.stream().filter(v->StrUtil.isNotBlank(v.getCardNo())).collect(Collectors.toMap(QmAppUserBankcard::getCardNo,Function.identity(),(oldValue,newValue)->newValue));
+//	  list.sort(Comparator.comparingInt(QmAppUserBankcard::getDefaultCard).reversed().thenComparingInt(QmAppUserBankcard::getBindCardType));
 //	 authItemsList.stream().allMatch
 	 
 }

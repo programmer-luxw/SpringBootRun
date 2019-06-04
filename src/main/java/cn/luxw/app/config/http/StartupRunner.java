@@ -29,6 +29,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
+import com.google.common.base.CharMatcher;
+
 import kong.unirest.Unirest;
 
 
@@ -117,5 +119,15 @@ public class StartupRunner implements CommandLineRunner {
         httpRequestFactory.setConnectTimeout(30 * 1000);
         return new RestTemplate(httpRequestFactory);
     }
+	
+	public static void main(String[] args) {
+		String mo = "159 66- 我 9 93311";
+		String r = CharMatcher.inRange('0', '9').retainFrom(mo);
+		//String r = CharMatcher.digit().retainFrom(mo);
+
+
+		//String r = mo.replaceAll("\\s*|-", "");
+		System.out.println(r);
+	}
 
 }
